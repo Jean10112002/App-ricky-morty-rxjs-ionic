@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading$|async"></ion-progress-bar>
+    <ion-title>Characters</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="characters">
+  <app-list-character *ngFor="let character of characters" [character]="character" ></app-list-character>
+  </ng-container>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+
+    <ion-infinite-scroll-content loadingText="Cargando mas personajes" loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="scrollTop()" *ngIf="arrowToTop" >
+        <ion-icon slot="start" name="arrow-up" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-footer>

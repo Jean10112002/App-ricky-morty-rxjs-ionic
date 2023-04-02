@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="character"></ion-back-button>
+    </ion-buttons>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading$|async"></ion-progress-bar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-container *ngIf="isLoading$|async">
+      <ion-card>
+        <ion-skeleton-text [animated]="true" style="width: 100%;height:300px"></ion-skeleton-text>
+        <ion-card-header>
+          <ion-skeleton-text [animated]="true" style="width: 200px"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip color="primary">
+
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+          </ion-chip>
+          <ion-chip>
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+
+          </ion-chip>
+          <ion-chip color="danger">
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+
+          </ion-chip>
+          <ion-chip color="medium">
+            <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
+
+          </ion-chip>
+        </ion-card-content>
+        <ion-skeleton-text [animated]="true" style="width: 100%"></ion-skeleton-text>
+      </ion-card>
+    </ng-container>
+  <ng-container *ngIf="character$|async as character">
+    <ion-card >
+      <ion-img src="{{character.image}}" ></ion-img>
+      <ion-card-header>
+        <ion-card-title> {{character.name}} </ion-card-title>
+        <ion-card-subtitle>{{character.species}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-chip color="primary">
+          <ion-icon name="videocam-outline"></ion-icon>
+          <ion-label> {{character.episode.length}} Episodes </ion-label>
+        </ion-chip>
+        <ion-chip>
+          <ion-icon name="transgender-outline"></ion-icon>
+          <ion-label> {{character.gender}} </ion-label>
+        </ion-chip>
+        <ion-chip [color]="character.status==='alive'?'primary':'danger'">
+          <ion-icon name="pulse-outline"></ion-icon>
+          <ion-label> {{character.status}} </ion-label>
+        </ion-chip>
+        <ion-chip color="medium">
+          <ion-icon name="compass-outline"></ion-icon>
+          <ion-label> {{character.location.name}} </ion-label>
+        </ion-chip>
+      </ion-card-content>
+      <ion-button  expand="block" fill="clear" shape="round">
+        See all episodes
+      </ion-button>
+
+    </ion-card>
+  </ng-container>
+
+</ion-content>

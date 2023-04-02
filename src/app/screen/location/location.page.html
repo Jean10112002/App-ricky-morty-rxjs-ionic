@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-progress-bar
+      type="indeterminate"
+      *ngIf="isLoading$|async"
+    ></ion-progress-bar>
+    <ion-title>Location</ion-title>
+  </ion-toolbar>
+  <ion-searchbar></ion-searchbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="locations">
+      <app-list-location
+        *ngFor="let location of locations"
+        [location]="location"
+      >
+    </app-list-location>
+  </ng-container>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingText="Cargando mas ubicaciones"
+      loadingSpinner="bubbles"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="scrollTop()" *ngIf="arrowToTop">
+        <ion-icon slot="start" name="arrow-up"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
