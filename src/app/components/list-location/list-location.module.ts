@@ -1,20 +1,22 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ComponentsSharedModule } from '../components.module';
-import { ModalCharactersPageModule } from '../modal-characters/modal-characters.module';
-import { ModalCharactersPage } from '../modal-characters/modal-characters.page';
 import { ListLocationComponent } from './list-location.component';
+import { ModalCharactersPageModule} from '../modal-characters/modal-characters.module'
 
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
+    FormsModule,
     IonicModule,
-    RouterModule,],
-  exports: [ListLocationComponent],
+    ModalCharactersPageModule
+  ],
   declarations: [ListLocationComponent],
-  providers: [],
-
+  exports:[
+    ListLocationComponent
+  ]
 })
-export class ListLocationModule { }
+export class ListLocationModule {}

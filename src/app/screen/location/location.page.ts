@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
-import { map, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
 import { ResultLocationI,RickyAndMortyLocationI } from 'src/app/interfaces/rickyMortyLocation.interface';
 import { RickymortyService } from 'src/app/services/rickymorty.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -15,12 +15,14 @@ export class LocationPage implements OnInit {
   @ViewChild(IonContent) content!: IonContent;
   arrowToTop:Boolean=false;
   locations!:ResultLocationI[];
-  isLoading$=this.spinnerService.isLoading$;
+  isLoading$!:Subject<boolean>;
   nextPage!:string
   constructor(private readonly rickyMortyService:RickymortyService,private spinnerService:SpinnerService) {
   }
 
   ngOnInit() {
+    this.isLoading$=this.spinnerService.isLoading$
+
     this.rickyMortyService.getLocations().pipe(tap(res=>{
       this.nextPage=res.info.next
      }),map((res:RickyAndMortyLocationI)=>res.results

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListCharacterComponent } from './list-character/list-character.component';
 import { ListEpisodeComponent } from './list-episode/list-episode.component';
+import { ListLocationComponent } from './list-location/list-location.component';
 
 
 
@@ -20,6 +21,7 @@ import { ListEpisodeComponent } from './list-episode/list-episode.component';
   exports:[
     ListCharacterComponent,
     ListEpisodeComponent,
+
   ],
 
 })

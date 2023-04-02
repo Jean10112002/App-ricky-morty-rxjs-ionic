@@ -13,7 +13,7 @@ import { ComponentsSharedModule } from '../components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsSharedModule,
+    ComponentsSharedModule
   ],
   declarations: [ModalCharactersPage],
   exports:[
