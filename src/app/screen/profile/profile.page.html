@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  >
     <ng-container *ngIf="isLoading$|async">
       <ion-card>
         <ion-skeleton-text [animated]="true" style="width: 100%;height:300px"></ion-skeleton-text>
@@ -49,6 +49,7 @@
           <ion-icon name="videocam-outline"></ion-icon>
           <ion-label> {{character.episode.length}} Episodes </ion-label>
         </ion-chip>
+
         <ion-chip>
           <ion-icon name="transgender-outline"></ion-icon>
           <ion-label> {{character.gender}} </ion-label>
@@ -61,12 +62,28 @@
           <ion-icon name="compass-outline"></ion-icon>
           <ion-label> {{character.location.name}} </ion-label>
         </ion-chip>
+
       </ion-card-content>
-      <ion-button  expand="block" fill="clear" shape="round">
+      <ion-button  expand="block" fill="clear" shape="round" (click)="getEpisodes(character.episode)">
         See all episodes
       </ion-button>
 
     </ion-card>
+    <ng-container *ngIf="episodes$|async as episodes">
+      <app-list-episode
+      *ngFor="let episode of episodes"
+      [episode]="episode"
+      ></app-list-episode>
+    </ng-container>
   </ng-container>
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="scrollTop()" *ngIf="arrowIsShow">
+        <ion-icon slot="start" name="arrow-up"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

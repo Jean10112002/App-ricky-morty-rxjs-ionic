@@ -4,10 +4,18 @@
     <ion-title>Characters</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="onChangeInput($event)" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <ng-container *ngIf="isLoading$|async">
+    <ion-item class="ion-margin-horizontal">
+      <ion-avatar slot="start" >
+        <ion-skeleton-text animated style="width: 100%;height: 100%;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+    </ion-item>
+  </ng-container>
   <ng-container *ngIf="characters">
   <app-list-character *ngFor="let character of characters" [character]="character" ></app-list-character>
   </ng-container>
@@ -26,3 +34,4 @@
   </ion-toolbar>
 
 </ion-footer>
+

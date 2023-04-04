@@ -1,17 +1,27 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Characters</ion-title>
+
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">Close</ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading$|async"></ion-progress-bar>
+  </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding"  >
   <ng-container *ngIf="characters$ | async as characters">
-    <app-list-character
+    <ng-container *ngIf="characters.length>0;else notExits">
+      <app-list-character
       *ngFor="let character of characters"
       [character]="character"
       (click)="closeModal()"
     ></app-list-character>
+    </ng-container>
   </ng-container>
 </ion-content>
+
+<ng-template #notExits>
+  <ion-label class="text-info">No existe personaje</ion-label>
+</ng-template>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { RickymortyService } from 'src/app/services/rickymorty.service';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor() { }
+  terminoBusqueda!:string
+  constructor(private rickyMortyService:RickymortyService) {
+  }
 
   ngOnInit() {
   }
